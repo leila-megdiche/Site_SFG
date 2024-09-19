@@ -1,0 +1,63 @@
+{% extends "base1.html" %}
+{% load static %}
+
+{% block title %}Supervisor Login{% endblock %}
+<head>
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+</head>
+  
+
+<div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Login Supervisor/Client</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Login</a></li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh; background: #9cd2e6d1;">
+    <div class="card card-container" style="padding: 10px; max-width: 500px; width: 200%;">
+        <img id="profile-img" class="profile-img-card mx-auto d-block" src="{% static 'assets/img/supervisor.png' %}" style="width: 400px; height: 350px;" />
+        <p id="profile-name" class="profile-name-card"></p>
+            <form method="post" action="{% url 'supervisor_login' %}" class="login-register" id="login-form">
+                {% csrf_token %}
+                <h1 class="login-title">SUPERVISOR</h1>
+                <div class="form-group">
+                    <label for="email">Adresse Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Votre adresse email" required>
+                </div>
+                {% if form.email.errors %}
+                <div class="text-danger" role="alert">{{ form.email.errors }}</div>
+                {% endif %}
+                {% if form.password.errors %}
+                <div class="text-danger" role="alert">{{ form.password.errors }}</div>
+                {% endif %}
+                {% if form.non_field_errors %}
+                <div class="text-danger" role="alert">{{ form.non_field_errors }}</div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+                    <span class="show-password">Afficher le mot de passe</span>
+                </div>
+                <button type="submit" class="login-button" style="width: 100%; border: none; font-size: 30px;">Login</button>
+                <div>
+                    <a href="{% url 'client_login' %}">
+                        <span class="login-signin" id="sign-up">CONNECT AS CLIENT</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'assets/js/style.js' %}"></script>
+{% endblock %}
